@@ -4,7 +4,7 @@ React Native component for handling swipe gestures in up, down, left and right d
 
 ## Installation
 
-`npm i -S react-native-swipe-gestures`
+`npm i -S react-native-swipe-gestures-plus`
 
 # License
 This is an updated version by [arunahuja94](https://github.com/arunahuja94). <br/>
@@ -17,7 +17,7 @@ Original author [glepur](https://github.com/glepur/react-native-swipe-gestures),
 
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
-import GestureRecognizer, {swipeDirections} from './components/AssetExample';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures-plus';
 
 export default function App(){
     const [myText, setMyText] = React.useState('I\'m ready to get swiped!');

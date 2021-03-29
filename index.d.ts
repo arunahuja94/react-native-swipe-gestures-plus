@@ -12,6 +12,8 @@ declare module 'react-native-swipe-gestures' {
     onSwipeDown?(gestureState: PanResponderGestureState): void;
     onSwipeLeft?(gestureState: PanResponderGestureState): void;
     onSwipeRight?(gestureState: PanResponderGestureState): void;
+	onPress?(gestureState: PanResponderGestureState): void;
+	onLongPress?(gestureState: PanResponderGestureState): void;
   }
 
   interface GestureRecognizerConfig {

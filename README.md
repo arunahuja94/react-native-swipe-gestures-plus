@@ -145,3 +145,15 @@ Can be passed within optional `config` property.
 | Params        | Type          | Description  |
 | ------------- |:-------------:| ------------ |
 | gestureState  | Object        | gestureState received from PanResponder  |
+
+#### onPress(gestureState)
+
+| Params        | Type          | Description  |
+| ------------- |:-------------:| ------------ |
+| gestureState  | Object        | gestureState received from PanResponder  |
+
+#### onLongPress(gestureState)
+
+| Params        | Type          | Description  |
+| ------------- |:-------------:| ------------ |
+| gestureState  | Object        | gestureState received from PanResponder  |

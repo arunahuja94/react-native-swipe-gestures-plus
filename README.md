@@ -4,7 +4,7 @@ React Native component for handling swipe gestures in up, down, left and right d
 
 ## Installation
 
-`npm i -S react-native-swipe-gestures`
+`npm i react-native-swipe-gestures-plus`
 
 # License
 This is an updated version by [arunahuja94](https://github.com/arunahuja94). <br/>
@@ -17,7 +17,7 @@ Original author [glepur](https://github.com/glepur/react-native-swipe-gestures),
 
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
-import GestureRecognizer, {swipeDirections} from './components/AssetExample';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures-plus';
 
 export default function App(){
     const [myText, setMyText] = React.useState('I\'m ready to get swiped!');
@@ -38,6 +38,14 @@ export default function App(){
  
   const onSwipeRight = (gestureState) => {
     setMyText('You swiped right!');
+  }
+  
+  const onPress = (gestureState) => {
+    setMyText('You Clicked!');
+  }
+  
+  const onLongPress = (gestureState) => {
+    setMyText('You Long Pressed!');
   }
  
   const onSwipe = (gestureName, gestureState) => {
@@ -78,8 +86,8 @@ export default function App(){
       onSwipeDown={(state) => onSwipeDown(state)}
       onSwipeLeft={(state) => onSwipeLeft(state)}
       onSwipeRight={(state) => onSwipeRight(state)}
-      onPress={(state) => onSwipeRight(state)}
-      onLongPress={(state) => onSwipeRight(state)}
+      onPress={(state) => onPress(state)}
+      onLongPress={(state) => onLongPress(state)}
       config={config}
       style={{
         flex: 1,
@@ -133,6 +141,18 @@ Can be passed within optional `config` property.
 | gestureState  | Object        | gestureState received from PanResponder  |
 
 #### onSwipeRight(gestureState)
+
+| Params        | Type          | Description  |
+| ------------- |:-------------:| ------------ |
+| gestureState  | Object        | gestureState received from PanResponder  |
+
+#### onPress(gestureState)
+
+| Params        | Type          | Description  |
+| ------------- |:-------------:| ------------ |
+| gestureState  | Object        | gestureState received from PanResponder  |
+
+#### onLongPress(gestureState)
 
 | Params        | Type          | Description  |
 | ------------- |:-------------:| ------------ |

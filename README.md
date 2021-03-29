@@ -39,6 +39,14 @@ export default function App(){
   const onSwipeRight = (gestureState) => {
     setMyText('You swiped right!');
   }
+  
+  const onPress = (gestureState) => {
+    setMyText('You Clicked!');
+  }
+  
+  const onLongPress = (gestureState) => {
+    setMyText('You Long Pressed!');
+  }
  
   const onSwipe = (gestureName, gestureState) => {
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT,ON_PRESS, ON_LONGPRESS} = swipeDirections;
@@ -78,8 +86,8 @@ export default function App(){
       onSwipeDown={(state) => onSwipeDown(state)}
       onSwipeLeft={(state) => onSwipeLeft(state)}
       onSwipeRight={(state) => onSwipeRight(state)}
-      onPress={(state) => onSwipeRight(state)}
-      onLongPress={(state) => onSwipeRight(state)}
+      onPress={(state) => onPress(state)}
+      onLongPress={(state) => onLongPress(state)}
       config={config}
       style={{
         flex: 1,

@@ -4,7 +4,7 @@ React Native component for handling swipe gestures in up, down, left and right d
 
 ## Installation
 
-`npm i -S react-native-swipe-gestures-plus`
+`... In Progress`
 
 # License
 This is an updated version by [arunahuja94](https://github.com/arunahuja94). <br/>

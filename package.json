@@ -1,24 +1,28 @@
 {
-  "name": "react-native-swipe-gestures",
+  "name": "react-native-swipe-gestures-plus",
   "types": "index.d.ts",
   "version": "1.0.5",
-  "description": "4-directional swipe gestures for react-native",
+  "description": "4-directional swipe gestures, press and Long Press Events for react-native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:glepur/react-native-swipe-gestures.git"
+    "url": "git@github.com:arunahuja94/react-native-swipe-gestures-plus.git"
   },
   "keywords": [
     "react-native",
     "swipe",
-    "gesture"
+    "gesture",
+	"Long Press"
   ],
   "bugs": {
-    "url": "https://github.com/glepur/react-native-swipe-gestures/issues"
+    "url": "https://github.com/arunahuja94/react-native-swipe-gestures-plus/issues"
   },
   "author": "Goran Lepur <goran.lepur1@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "contributors": [
+    "Arun Ahuja <arunahuja94@gmail.com/> "
+  ],
 }

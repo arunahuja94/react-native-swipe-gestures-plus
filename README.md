@@ -79,6 +79,8 @@ export default function App(){
   const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80
+	swipeEnabled:true,
+    longpressDelay:700,				   					
   };
 
   return (

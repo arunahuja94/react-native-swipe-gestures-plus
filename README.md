@@ -2,8 +2,8 @@
 
 React Native component for handling swipe gestures in up, down, left and right direction with Press and Long Press Events.
 
-[![npm version](https://badge.fury.io/js/react-native-swipe-gestures-plus.svg)](https://badge.fury.io/js/react-native-swipe-gestures-plus)
-
+![npm](https://img.shields.io/npm/v/react-native-swipe-gestures-plus)
+![npm](https://img.shields.io/npm/dw/react-native-swipe-gestures-plus)
 ## Installation
 
 `npm i react-native-swipe-gestures-plus`

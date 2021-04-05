@@ -108,7 +108,7 @@ class GestureRecognizer extends Component {
   const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN,ON_PRESS,ON_LONGPRESS } = swipeDirections;
     const { dx, dy } = gestureState;
      endTime = new Date().getTime();
-     longpress = (endTime - startTime > 500) ? true : false;
+     longpress = (endTime - startTime > this.props.longpressDelay) ? true : false;
      
     if(this._gestureIsClick(gestureState) && longpress) {return ON_LONGPRESS;}
 
@@ -141,5 +141,6 @@ class GestureRecognizer extends Component {
 }
 GestureRecognizer.defaultProps = {
   swipeEnabled: true,
+  longpressDelay:500,
 };
 export default GestureRecognizer;

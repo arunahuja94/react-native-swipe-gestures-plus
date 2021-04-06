@@ -93,6 +93,7 @@ export default function App(){
       onPress={(state) => onPress(state)}
       onLongPress={(state) => onLongPress(state)}
       config={config}
+      gestureStyle={{width:'100%',height:'100%',justifyContent: "center",alignItems: "center",flex:1,backgroundColor: backgroundColor}}
       style={{
         flex: 1,
         backgroundColor: backgroundColor,

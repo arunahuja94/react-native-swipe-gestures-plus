@@ -1,7 +1,7 @@
 "use strict";
 
 import React, { Component } from "react";
-import { View, PanResponder } from "react-native";
+import { View, PanResponder,Animated } from "react-native";
 
 export const swipeDirections = {
   SWIPE_UP: "SWIPE_UP",
@@ -136,7 +136,12 @@ class GestureRecognizer extends Component {
   }
 
   render() {
-    return <View {...this.props} {...this._panResponder.panHandlers} />;
+	 return (
+      <Animated.View {...this._panResponder.panHandlers} style={this.props.gestureStyle}>
+        <View>{this.props.children}</View>
+      </Animated.View>
+    
+    );
   }
 }
 GestureRecognizer.defaultProps = {

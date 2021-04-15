@@ -1,21 +1,22 @@
-"use strict";
+'use strict';
 
-import React, { Component } from "react";
-import { View, PanResponder,Animated } from "react-native";
+import React, { Component } from 'react';
+import { View, PanResponder, Animated } from 'react-native';
 
 export const swipeDirections = {
-  SWIPE_UP: "SWIPE_UP",
-  SWIPE_DOWN: "SWIPE_DOWN",
-  SWIPE_LEFT: "SWIPE_LEFT",
-  SWIPE_RIGHT: "SWIPE_RIGHT",
+  SWIPE_UP: 'SWIPE_UP',
+  SWIPE_DOWN: 'SWIPE_DOWN',
+  SWIPE_LEFT: 'SWIPE_LEFT',
+  SWIPE_RIGHT: 'SWIPE_RIGHT',
   ON_PRESS: 'ON_PRESS',
   ON_LONGPRESS: 'ON_LONGPRESS',
+  ON_LONGPRESS_RELEASE: 'ON_LONGPRESS_RELEASE',
 };
-        var startTime, endTime, longpress;
+var startTime, endTime, longpress;
 const swipeConfig = {
   velocityThreshold: 0.3,
   directionalOffsetThreshold: 80,
-  gestureIsClickThreshold: 5
+  gestureIsClickThreshold: 5,
 };
 
 function isValidSwipe(
@@ -39,27 +40,29 @@ class GestureRecognizer extends Component {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: shouldSetResponder,
       onMoveShouldSetPanResponder: shouldSetResponder,
+      onPanResponderGrant: (e, gestureState) => {
+        this.onLongPressTimeout = setTimeout(() => {
+          this._triggerSwipeHandlers('ON_LONGPRESS', gestureState);
+        }, this.props.longpressDelay);
+      },
       onPanResponderRelease: responderEnd,
-      onPanResponderTerminate: responderEnd
+      onPanResponderTerminate: responderEnd,
     });
   }
-  
+
   componentDidUpdate(prevProps) {
     if (this.props.config !== prevProps.config) {
       this.swipeConfig = Object.assign(swipeConfig, this.props.config);
     }
   }
-  
+
   _handleShouldSetPanResponder(evt, gestureState) {
-  startTime = new Date().getTime();
-    return (
-      this.props.swipeEnabled &&
-      evt.nativeEvent.touches.length === 1
-    );
+    startTime = new Date().getTime();
+    return this.props.swipeEnabled && evt.nativeEvent.touches.length === 1;
   }
 
   _gestureIsClick(gestureState) {
-   return (
+    return (
       Math.abs(gestureState.dx) < swipeConfig.gestureIsClickThreshold &&
       Math.abs(gestureState.dy) < swipeConfig.gestureIsClickThreshold
     );
@@ -68,6 +71,7 @@ class GestureRecognizer extends Component {
   _handlePanResponderEnd(evt, gestureState) {
     const swipeDirection = this._getSwipeDirection(gestureState);
     this._triggerSwipeHandlers(swipeDirection, gestureState);
+    clearTimeout(this.onLongPressTimeout);
   }
 
   _triggerSwipeHandlers(swipeDirection, gestureState) {
@@ -78,9 +82,18 @@ class GestureRecognizer extends Component {
       onSwipeLeft,
       onSwipeRight,
       onPress,
-      onLongPress
+      onLongPress,
+      onLongPressRelease,
     } = this.props;
-    const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN,ON_PRESS,ON_LONGPRESS } = swipeDirections;
+    const {
+      SWIPE_LEFT,
+      SWIPE_RIGHT,
+      SWIPE_UP,
+      SWIPE_DOWN,
+      ON_PRESS,
+      ON_LONGPRESS,
+      ON_LONGPRESS_RELEASE,
+    } = swipeDirections;
     onSwipe && onSwipe(swipeDirection, gestureState);
     switch (swipeDirection) {
       case SWIPE_LEFT:
@@ -101,18 +114,33 @@ class GestureRecognizer extends Component {
       case ON_LONGPRESS:
         onLongPress && onLongPress(gestureState);
         break;
+      case ON_LONGPRESS_RELEASE:
+        onLongPressRelease && onLongPressRelease(gestureState);
+        break;
     }
   }
 
   _getSwipeDirection(gestureState) {
-  const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN,ON_PRESS,ON_LONGPRESS } = swipeDirections;
+    const {
+      SWIPE_LEFT,
+      SWIPE_RIGHT,
+      SWIPE_UP,
+      SWIPE_DOWN,
+      ON_PRESS,
+      ON_LONGPRESS,
+      ON_LONGPRESS_RELEASE,
+    } = swipeDirections;
     const { dx, dy } = gestureState;
-     endTime = new Date().getTime();
-     longpress = (endTime - startTime > this.props.longpressDelay) ? true : false;
-     
-    if(this._gestureIsClick(gestureState) && longpress) {return ON_LONGPRESS;}
+    endTime = new Date().getTime();
+    longpress = endTime - startTime > this.props.longpressDelay ? true : false;
 
-    if(this._gestureIsClick(gestureState) && !longpress) { return ON_PRESS; }
+    if (this._gestureIsClick(gestureState) && longpress) {
+      return ON_LONGPRESS_RELEASE;
+    }
+
+    if (this._gestureIsClick(gestureState) && !longpress) {
+      return ON_PRESS;
+    }
 
     if (this._isValidHorizontalSwipe(gestureState)) {
       return dx > 0 ? SWIPE_RIGHT : SWIPE_LEFT;
@@ -136,16 +164,17 @@ class GestureRecognizer extends Component {
   }
 
   render() {
-	 return (
-      <Animated.View {...this._panResponder.panHandlers} style={this.props.gestureStyle}>
+    return (
+      <Animated.View
+        {...this._panResponder.panHandlers}
+        style={this.props.gestureStyle}>
         <View>{this.props.children}</View>
       </Animated.View>
-    
     );
   }
 }
 GestureRecognizer.defaultProps = {
   swipeEnabled: true,
-  longpressDelay:500,
+  longpressDelay: 500,
 };
 export default GestureRecognizer;

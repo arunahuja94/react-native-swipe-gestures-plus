@@ -1,16 +1,14 @@
-'use strict';
-
-import React, { Component } from 'react';
-import { View, PanResponder, Animated } from 'react-native';
+import React, { Component } from "react";
+import { PanResponder, Animated } from "react-native";
 
 export const swipeDirections = {
-  SWIPE_UP: 'SWIPE_UP',
-  SWIPE_DOWN: 'SWIPE_DOWN',
-  SWIPE_LEFT: 'SWIPE_LEFT',
-  SWIPE_RIGHT: 'SWIPE_RIGHT',
-  ON_PRESS: 'ON_PRESS',
-  ON_LONGPRESS: 'ON_LONGPRESS',
-  ON_LONGPRESS_RELEASE: 'ON_LONGPRESS_RELEASE',
+  SWIPE_UP: "SWIPE_UP",
+  SWIPE_DOWN: "SWIPE_DOWN",
+  SWIPE_LEFT: "SWIPE_LEFT",
+  SWIPE_RIGHT: "SWIPE_RIGHT",
+  ON_PRESS: "ON_PRESS",
+  ON_LONGPRESS: "ON_LONGPRESS",
+  ON_LONGPRESS_RELEASE: "ON_LONGPRESS_RELEASE",
 };
 var startTime, endTime, longpress;
 const swipeConfig = {
@@ -42,7 +40,7 @@ class GestureRecognizer extends Component {
       onMoveShouldSetPanResponder: shouldSetResponder,
       onPanResponderGrant: (e, gestureState) => {
         this.onLongPressTimeout = setTimeout(() => {
-          this._triggerSwipeHandlers('ON_LONGPRESS', gestureState);
+          this._triggerSwipeHandlers("ON_LONGPRESS", gestureState);
         }, this.props.longpressDelay);
       },
       onPanResponderRelease: responderEnd,
@@ -167,8 +165,9 @@ class GestureRecognizer extends Component {
     return (
       <Animated.View
         {...this._panResponder.panHandlers}
-        style={this.props.gestureStyle}>
-        <View>{this.props.children}</View>
+        style={this.props.gestureStyle}
+      >
+        {this.props.children}
       </Animated.View>
     );
   }
